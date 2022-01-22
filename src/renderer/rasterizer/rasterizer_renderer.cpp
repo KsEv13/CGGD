@@ -10,7 +10,7 @@ void cg::renderer::rasterization_renderer::init()
 
 	camera = std::make_shared<cg::world::camera>();
 	camera->set_height(static_cast<float>(settings->height));
-	camera->set_width(static_cast<float>(settings->height));
+	camera->set_width(static_cast<float>(settings->width));
 	camera->set_position(float3{
 			settings->camera_position[0],
 			settings->camera_position[1],

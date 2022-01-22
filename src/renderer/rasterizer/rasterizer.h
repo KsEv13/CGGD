@@ -52,47 +52,74 @@ namespace cg::renderer
 			std::shared_ptr<resource<RT>> in_render_target,
 			std::shared_ptr<resource<float>> in_depth_buffer)
 	{
-		THROW_ERROR("Not implemented yet");
+		if (in_render_target)
+			render_target = in_render_target;
+
+		if (in_depth_buffer)
+			depth_buffer = in_depth_buffer;
 	}
 
 	template<typename VB, typename RT>
 	inline void rasterizer<VB, RT>::clear_render_target(
 			const RT& in_clear_value, const float in_depth)
 	{
-		THROW_ERROR("Not implemented yet");
+		if (render_target)
+		{
+			for (size_t i = 0; i < render_target->get_number_of_elements(); i++) {
+				render_target->item(i) = in_clear_value;
+			}
+		}
+		if (depth_buffer)
+		{
+			for (size_t i = 0; i < depth_buffer->get_number_of_elements(); i++) {
+				depth_buffer->item(i) = in_depth;
+			}
+		}
 	}
 
 	template<typename VB, typename RT>
 	inline void rasterizer<VB, RT>::set_vertex_buffer(
 			std::shared_ptr<resource<VB>> in_vertex_buffer)
 	{
-		THROW_ERROR("Not implemented yet");
+		vertex_buffer = in_vertex_buffer;
 	}
 
 	template<typename VB, typename RT>
 	inline void rasterizer<VB, RT>::set_index_buffer(
 			std::shared_ptr<resource<unsigned int>> in_index_buffer)
 	{
-		THROW_ERROR("Not implemented yet");
+		index_buffer = in_index_buffer;
 	}
 
 	template<typename VB, typename RT>
 	inline void rasterizer<VB, RT>::set_viewport(size_t in_width, size_t in_height)
 	{
-		THROW_ERROR("Not implemented yet");
+		width = in_width;
+		height = in_height;
 	}
 
 	template<typename VB, typename RT>
 	inline void rasterizer<VB, RT>::draw(size_t num_vertexes, size_t vertex_offset)
 	{
-		THROW_ERROR("Not implemented yet");
+		size_t vertex_id = vertex_offset;
+		while (vertex_id < vertex_offset + num_vertexes)
+		{
+			std::vector<VB> vertices(3);
+			vertices[0] = vertex_buffer->item(index_buffer->item(vertex_id++));
+			vertices[1] = vertex_buffer->item(index_buffer->item(vertex_id++));
+			vertices[2] = vertex_buffer->item(index_buffer->item(vertex_id++));
+			for (auto& vertex: vertices) {
+				float4 coords{vertex.x, vertex.y, vertex.z, 1.f};
+				auto processed_vertex = vertex_shader(coords, vertex);
+			}
+		}
 	}
 
 	template<typename VB, typename RT>
 	inline float
 	rasterizer<VB, RT>::edge_function(float2 a, float2 b, float2 c)
 	{
-		THROW_ERROR("Not implemented yet");
+		return (c.x - a.x)*(b.y - a.y) - (c.y - a.y)*(b.x - a.x);
 	}
 
 	template<typename VB, typename RT>

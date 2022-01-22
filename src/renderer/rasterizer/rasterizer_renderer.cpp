@@ -39,9 +39,16 @@ void cg::renderer::rasterization_renderer::render()
 {
 	rasterizer->clear_render_target({100, 0, 100});
 	float4x4 matrix = mul(camera->get_projection_matrix(), camera->get_view_matrix(), model->get_world_matrix());
-	rasterizer->vertex_shader = [&](float4 vertex, cg::vertex vertex_data)->
+	rasterizer->vertex_shader = [&](float4 vertex, cg::vertex vertex_data)
 	{	auto processed = mul(matrix, vertex);
 		return std::make_pair(processed, vertex_data);
+	};
+
+	rasterizer->pixel_shader = [](cg::vertex vertex_data, float z){
+		return cg::color{
+					vertex_data.ambient_r,
+					vertex_data.ambient_g,
+					vertex_data.ambient_b};
 	};
 
 	for (size_t shape_id = 0; shape_id < model->get_index_buffers().size(); ++shape_id) {

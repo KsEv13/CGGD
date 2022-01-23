@@ -159,7 +159,7 @@ namespace cg::renderer
 						float u = edge1/edge;
 						float v = edge2/edge;
 						float w = edge0/edge;
-						float depth = u*vertices[0].z + u*vertices[1].z + u*vertices[2].z;
+						float depth = u*vertices[0].z + v*vertices[1].z + w*vertices[2].z;
 						if(depth_test(depth, x, y))
 						{
 							auto pixel_result = pixel_shader(vertices[0], depth);

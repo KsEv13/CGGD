@@ -1,6 +1,6 @@
 # Computer graphics in Game development course
 
-This repo contains a template for Computer graphics in Game development labs (spring 2022)
+This repo is for Computer graphics in Game development labs (spring 2022)
 
 ## Pre-requirements
 
@@ -31,3 +31,6 @@ cmake .. -A x64
 - [Cornell Box models](https://casual-effects.com/g3d/data10/index.html#) by Morgan McGuire (CC BY 3.0 License)
 - [Cube model](https://casual-effects.com/g3d/data10/index.html#) by Morgan McGuire (CC BY 3.0 License)
 - [Dabrovic Sponza](https://casual-effects.com/g3d/data10/index.html#) by Marko Dabrovic (CC BY-NC)
+
+### Author 
+#### *Kseniya Evdokimova*

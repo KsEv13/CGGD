@@ -36,9 +36,9 @@ void cg::renderer::rasterization_renderer::destroy() {}
 
 void cg::renderer::rasterization_renderer::update() {}
 
-void cg::renderer::rasterization_renderer::render()
+void cg::renderer::rasterization_renderer::render() //pick the color of the background
 {
-	rasterizer->clear_render_target({100, 0, 100});
+	rasterizer->clear_render_target({10, 0, 100});
 	float4x4 matrix = mul(camera->get_projection_matrix(), camera->get_view_matrix(), model->get_world_matrix());
 	rasterizer->vertex_shader = [&](float4 vertex, cg::vertex vertex_data)
 	{	auto processed = mul(matrix, vertex);
